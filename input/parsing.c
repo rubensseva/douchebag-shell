@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #include "../utils/constants.h"
+#include "../utils/commands-map.h"
 
 int parse_command(char *command, int *command_index) {
   *command_index = -1;

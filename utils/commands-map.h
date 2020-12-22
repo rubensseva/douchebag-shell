@@ -17,15 +17,6 @@ int help(char** args, int length);
 int pause_func(char** args, int length);
 int quit(char** args, int length);
 
-command commands_list[] = { 
-  { .command = "cd",      .action = cd },
-  { .command = "clr",     .action = clr },
-  { .command = "dir",     .action = dir },
-  { .command = "environ", .action = environ_func },
-  { .command = "echo",    .action = echo },
-  { .command = "help",    .action = help },
-  { .command = "pause",   .action = pause_func },
-  { .command = "quit",    .action = quit },
-};
+extern const command commands_list[];
 
 #endif

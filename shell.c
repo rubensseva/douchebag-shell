@@ -5,11 +5,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "./utils/constants.h"
-#include "./utils/commands-map.h"
 #include "./input/sanitation.h"
 #include "./input/processing.h"
 #include "./input/parsing.h"
+#include "./utils/constants.h"
+#include "./utils/commands-map.h"
 
 
 
