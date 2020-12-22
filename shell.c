@@ -51,6 +51,7 @@ int main() {
         // We are in the child process
         execvp(strs[0], strs); // Replace the entire child process with the command to execute
         printf("Something went wrong when trying to execute command... Are you sure the command exists?\n"); // Should not get here
+        return 0;
       } else {
         // We are in the parent process
         wait(NULL); // Wait for child process to finish

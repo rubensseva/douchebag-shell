@@ -1,5 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
+#include <dirent.h>
+
+extern char **environ;
 
 int notImplemented(char** args, int length) {
   printf("You entered a builtin command, but it's not implemented yet...\n");
@@ -17,3 +21,64 @@ int cd(char** args, int length) {
   }
 }
 
+int clr(char** args, int length) {
+  const char *CLEAR_SCREEN_ANSI = "\e[1;1H\e[2J";
+  write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
+  return 0;
+}
+
+int dir(char** args, int length) {
+  printf("Detected dir command, manually listing contents of directory...\n");
+  printf("Directory to list: %s\n", args[1]);
+  DIR *d;
+  struct dirent *dir;
+  if (length <= 1) {
+    d = opendir(".");
+  } else {
+    d = opendir(args[1]);
+  }
+  if (d)
+  {
+      while ((dir = readdir(d)) != NULL)
+      {
+          printf("%s ", dir->d_name);
+      }
+      printf("\n");
+      closedir(d);
+  }
+  return(0);
+}
+
+int environ_func(char** args, int length) {
+  char *s = *environ;
+  for (int i = 1; s; i++) {
+    printf("%s\n", s);
+    s = *(environ+i);
+  }
+  return 0;
+}
+
+int echo(char** args, int length) {
+  if (length <= 0) {
+    printf("Didnt find any comment to print...");
+    return 1;
+  }
+  printf("%s\n", args[1]);
+  return 0;
+}
+
+int help(char** args, int length) {
+  printf("help command is not implemented yet\n");
+  return 0;
+}
+
+int pause_func(char** args, int length) {
+  printf("pause command is not implemented yet\n");
+  return 0;
+}
+
+int quit(char** args, int length) {
+  printf("Exiting...\n");
+  exit(0);
+  return 0;
+}
