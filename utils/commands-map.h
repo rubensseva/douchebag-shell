@@ -1,3 +1,6 @@
+#ifndef COMMANDS_MAP
+#define COMMANDS_MAP
+
 typedef struct Command {
    char  command[256];
    int (*action)(char** args, int length);
@@ -24,3 +27,5 @@ command commands_list[] = {
   { .command = "pause",   .action = pause_func },
   { .command = "quit",    .action = quit },
 };
+
+#endif
