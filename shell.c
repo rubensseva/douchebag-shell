@@ -6,9 +6,11 @@
 #include <string.h>
 
 #include "./utils/constants.h"
+#include "./utils/commands-map.h"
 #include "./input/sanitation.h"
 #include "./input/processing.h"
-/* #include "./input/parsing.h" */ // not used yet
+#include "./input/parsing.h"
+
 
 
 int main() {
@@ -35,22 +37,20 @@ int main() {
 
     char *command = strs[0];
     int command_index;
+    parse_command(command, &command_index);
 
-    // We need to detect for cd command so we change the working
-    // dir of the actuall shell process, and not the child process
-    if (strcmp(strs[0], "cd") == 0) {
-      printf("Detected cd command, manually executing chdir...\n");
-      int err = chdir(strs[1]);
+    if (command_index != -1) {
+      int err = commands_list[command_index].action(strs, num_words);
       if (err != 0) {
-        printf("Error when changing directory! Did you specify a correct path?: %s\n", strs[1]);
-      } else {
-        printf("Dir changed successfully\n");
+        printf("Error when executing built-in command\n");
+        continue;
       }
     } else {
       int pid = fork();
       if (pid == 0) {
         // We are in the child process
         execvp(strs[0], strs); // Replace the entire child process with the command to execute
+        printf("Something went wrong when trying to execute command... Are you sure the command exists?\n"); // Should not get here
       } else {
         // We are in the parent process
         wait(NULL); // Wait for child process to finish

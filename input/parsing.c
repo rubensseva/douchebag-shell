@@ -12,8 +12,5 @@ int parse_command(char *command, int *command_index) {
     }
   }
   
-  if (*command_index == -1) {
-    return 1;
-  }
   return 0;
 }
