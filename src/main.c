@@ -14,6 +14,14 @@
 
 
 int main() {
+
+  char linkname[256];
+  int r = readlink("/proc/self/exe", linkname, 256);
+  linkname[r] = '\0';
+  char shell_env[256] = "shell=";
+  strcat(shell_env, linkname);
+  putenv(shell_env);
+
   printf("Oh... It's you again... What do you want?\n");
 
   while(1) {
