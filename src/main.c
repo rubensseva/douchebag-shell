@@ -15,11 +15,11 @@
 
 int main() {
 
-  char linkname[256];
-  int r = readlink("/proc/self/exe", linkname, 256);
-  linkname[r] = '\0';
+  char shell_bin_path[256];
+  int r = readlink("/proc/self/exe", shell_bin_path, 256);
+  shell_bin_path[r] = '\0';
   char shell_env[256] = "shell=";
-  strcat(shell_env, linkname);
+  strcat(shell_env, shell_bin_path);
   putenv(shell_env);
 
   printf("Oh... It's you again... What do you want?\n");
@@ -56,6 +56,10 @@ int main() {
     } else {
       int pid = fork();
       if (pid == 0) {
+        char shell_env[256] = "parent=";
+        strcat(shell_env, shell_bin_path);
+        putenv(shell_env);
+
         // We are in the child process
         execvp(strs[0], strs); // Replace the entire child process with the command to execute
         printf("Something went wrong when trying to execute command... Are you sure the command exists?\n"); // Should not get here
