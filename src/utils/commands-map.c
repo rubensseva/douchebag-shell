@@ -78,7 +78,10 @@ int echo(char** args, int length) {
     printf("Didnt find any comment to print...");
     return 1;
   }
-  printf("%s\n", args[1]);
+  for (int i = 1; i < length; i++) {
+    printf("%s ", args[i]);
+  }
+  printf("\n");
   return 0;
 }
 

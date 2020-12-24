@@ -4,7 +4,9 @@ objects = $(build_dir)/main.o $(build_dir)/input/sanitation.o \
 					$(build_dir)/input/processing.o \
 					$(build_dir)/input/parsing.o \
 					$(build_dir)/utils/constants.o \
-					$(build_dir)/utils/commands-map.o
+					$(build_dir)/utils/commands-map.o \
+					$(build_dir)/utils/env.o
+
 
 dsh: pre-build $(objects)
 	  gcc -o $(build_dir)/dsh $(objects)
@@ -30,6 +32,9 @@ $(build_dir)/utils/constants.o: $(src_dir)/utils/constants.c $(src_dir)/utils/co
 
 $(build_dir)/utils/commands-map.o: $(src_dir)/utils/commands-map.c $(src_dir)/utils/commands-map.h
 	gcc -c $(src_dir)/utils/commands-map.c -o $(build_dir)/utils/commands-map.o
+
+$(build_dir)/utils/env.o: $(src_dir)/utils/env.c $(src_dir)/utils/env.h
+	gcc -c $(src_dir)/utils/env.c -o $(build_dir)/utils/env.o
 
 clean: 
 	rm $(build_dir)/dsh $(objects)

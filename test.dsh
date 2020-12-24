@@ -1,0 +1,5 @@
+echo "This is from a file"
+echo "ANother echo, what about a little ls?"
+ls
+dir
+environ
