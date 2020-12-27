@@ -1,3 +1,3 @@
 
-void set_bin_path_parent();
-void set_bin_path_child();
+char *create_parent_bin_env_var();
+char *create_child_bin_env_var();

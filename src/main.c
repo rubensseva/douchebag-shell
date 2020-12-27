@@ -25,13 +25,10 @@ int main(int argc, char **argv) {
     printf("No input argument, scanning input...\n");
   }
 
-  /* char shell_bin_path[256]; */
-  /* int r = readlink("/proc/self/exe", shell_bin_path, 256); */
-  /* shell_bin_path[r] = '\0'; */
-  /* char shell_env[256] = "shell="; */
-  /* strcat(shell_env, shell_bin_path); */
-  /* putenv(shell_env); */
-  set_bin_path_parent();
+  char *parent_bin_env_var = create_parent_bin_env_var();
+  if (putenv(parent_bin_env_var) != 0) {
+    perror("putenv");
+  }
 
   printf("Oh... It's you again... What do you want?\n");
 
@@ -94,12 +91,12 @@ int main(int argc, char **argv) {
       int pid = fork();
       if (pid == 0) {
         // We are in the child process
-        /* char shell_env[256] = "parent="; */
-        /* strcat(shell_env, shell_bin_path); */
-        /* putenv(shell_env); */
-        set_bin_path_child();
+        char *child_bin_env_var = create_child_bin_env_var();
+        if (putenv(child_bin_env_var) != 0) {
+          perror("putenv");
+        }
         execvp(strs[0], strs); // Replace the entire child process with the command to execute
-        printf("Something went wrong when trying to execute command... Are you sure the command exists?\n"); // Should not get here
+        perror("Error when exetucing command");
         _exit(EXIT_FAILURE);
       } else {
         // We are in the parent process

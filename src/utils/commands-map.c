@@ -62,6 +62,12 @@ int dir(char** args, int length) {
   return(0);
 }
 
+
+/*
+ * IMPORTANT: Since this is a builtin, it will not be executed
+ * by a child process, and so the "parent" env variable will not
+ * be present
+ */
 int environ_func(char** args, int length) {
   printf("Detected environ command, manually listing env vars...\n");
   char *s = *environ;
