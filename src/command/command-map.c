@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <dirent.h>
 
-#include "./commands-map.h"
+#include "./command-map.h"
 
 const command commands_list[] = { 
   { .command = "cd",      .action = cd },

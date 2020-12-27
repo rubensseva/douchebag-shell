@@ -9,8 +9,8 @@
 #include "./input/processing.h"
 #include "./input/parsing.h"
 #include "./utils/constants.h"
-#include "./utils/commands-map.h"
 #include "./utils/env.h"
+#include "./command/command-map.h"
 
 
 
@@ -32,10 +32,12 @@ int main(int argc, char **argv) {
 
   printf("Oh... It's you again... What do you want?\n");
 
+  // Prepare to read if input is a file
   FILE *stream;
   char *line = NULL;
   size_t len = 0;
   ssize_t nread;
+  // If shell was invoked with arg, it is an input file
   if (argc == 2) {
     stream = fopen(argv[1], "r");
     if (stream == NULL) {

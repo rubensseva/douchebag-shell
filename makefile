@@ -4,8 +4,8 @@ objects = $(build_dir)/main.o $(build_dir)/input/sanitation.o \
 					$(build_dir)/input/processing.o \
 					$(build_dir)/input/parsing.o \
 					$(build_dir)/utils/constants.o \
-					$(build_dir)/utils/commands-map.o \
-					$(build_dir)/utils/env.o
+					$(build_dir)/utils/env.o \
+					$(build_dir)/command/command-map.o \
 
 flags_1 = -c -g
 flags_2 = -g
@@ -17,6 +17,7 @@ dsh: pre-build $(objects)
 pre-build:
 	mkdir -p $(build_dir)/input
 	mkdir -p $(build_dir)/utils
+	mkdir -p $(build_dir)/command
 
 $(build_dir)/main.o: $(src_dir)/main.c
 	gcc $(flags_1) $(src_dir)/main.c -o $(build_dir)/main.o
@@ -33,8 +34,8 @@ $(build_dir)/input/parsing.o: $(src_dir)/input/parsing.c $(src_dir)/input/parsin
 $(build_dir)/utils/constants.o: $(src_dir)/utils/constants.c $(src_dir)/utils/constants.h
 	gcc $(flags_1) $(src_dir)/utils/constants.c -o $(build_dir)/utils/constants.o
 
-$(build_dir)/utils/commands-map.o: $(src_dir)/utils/commands-map.c $(src_dir)/utils/commands-map.h
-	gcc $(flags_1) $(src_dir)/utils/commands-map.c -o $(build_dir)/utils/commands-map.o
+$(build_dir)/command/command-map.o: $(src_dir)/command/command-map.c $(src_dir)/command/command-map.h
+	gcc $(flags_1) $(src_dir)/command/command-map.c -o $(build_dir)/command/command-map.o
 
 $(build_dir)/utils/env.o: $(src_dir)/utils/env.c $(src_dir)/utils/env.h
 	gcc $(flags_1) $(src_dir)/utils/env.c -o $(build_dir)/utils/env.o
