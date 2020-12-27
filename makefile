@@ -19,26 +19,33 @@ pre-build:
 	mkdir -p $(build_dir)/utils
 	mkdir -p $(build_dir)/command
 
+
 $(build_dir)/main.o: $(src_dir)/main.c
 	gcc $(flags_1) $(src_dir)/main.c -o $(build_dir)/main.o
 
-$(build_dir)/input/sanitation.o: $(src_dir)/input/sanitation.c $(src_dir)/input/sanitation.h
-	gcc $(flags_1) $(src_dir)/input/sanitation.c -o $(build_dir)/input/sanitation.o
+sanitation = input/sanitation
+$(build_dir)/$(sanition).o: $(src_dir)/$(sanitation).c $(src_dir)/$(sanitation).h
+	gcc $(flags_1) $(src_dir)/$(sanitation).c -o $(build_dir)/$(sanitation).o
 
-$(build_dir)/input/processing.o: $(src_dir)/input/processing.c $(src_dir)/input/processing.h
-	gcc $(flags_1) $(src_dir)/input/processing.c -o $(build_dir)/input/processing.o
+processing = input/processing
+$(build_dir)/$(processing).o: $(src_dir)/$(processing).c $(src_dir)/$(processing).h
+	gcc $(flags_1) $(src_dir)/$(processing).c -o $(build_dir)/$(processing).o
 
-$(build_dir)/input/parsing.o: $(src_dir)/input/parsing.c $(src_dir)/input/parsing.h
-	gcc $(flags_1) $(src_dir)/input/parsing.c -o $(build_dir)/input/parsing.o
+parsing = input/parsing
+$(build_dir)/$(parsing).o: $(src_dir)/$(parsing).c $(src_dir)/$(parsing).h
+	gcc $(flags_1) $(src_dir)/$(parsing).c -o $(build_dir)/$(parsing).o
 
-$(build_dir)/utils/constants.o: $(src_dir)/utils/constants.c $(src_dir)/utils/constants.h
-	gcc $(flags_1) $(src_dir)/utils/constants.c -o $(build_dir)/utils/constants.o
+constants = utils/constants
+$(build_dir)/$(constants).o: $(src_dir)/$(constants).c $(src_dir)/$(constants).h
+	gcc $(flags_1) $(src_dir)/$(constants).c -o $(build_dir)/$(constants).o
 
-$(build_dir)/command/command-map.o: $(src_dir)/command/command-map.c $(src_dir)/command/command-map.h
-	gcc $(flags_1) $(src_dir)/command/command-map.c -o $(build_dir)/command/command-map.o
+command-map = command/command-map
+$(build_dir)/$(command-map).o: $(src_dir)/$(command-map).c $(src_dir)/$(command-map).h
+	gcc $(flags_1) $(src_dir)/$(command-map).c -o $(build_dir)/$(command-map).o
 
-$(build_dir)/utils/env.o: $(src_dir)/utils/env.c $(src_dir)/utils/env.h
-	gcc $(flags_1) $(src_dir)/utils/env.c -o $(build_dir)/utils/env.o
+env = utils/env
+$(build_dir)/$(env).o: $(src_dir)/$(env).c $(src_dir)/$(env).h
+	gcc $(flags_1) $(src_dir)/$(env).c -o $(build_dir)/$(env).o
 
 clean: 
 	rm $(build_dir)/dsh $(objects)
