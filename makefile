@@ -5,6 +5,7 @@ objects = $(build_dir)/main.o $(build_dir)/input/sanitation.o \
 					$(build_dir)/input/parsing.o \
 					$(build_dir)/utils/constants.o \
 					$(build_dir)/utils/env.o \
+					$(build_dir)/utils/custom_string.o \
 					$(build_dir)/command/command-map.o \
 
 flags_1 = -c -g
@@ -46,6 +47,10 @@ $(build_dir)/$(command-map).o: $(src_dir)/$(command-map).c $(src_dir)/$(command-
 env = utils/env
 $(build_dir)/$(env).o: $(src_dir)/$(env).c $(src_dir)/$(env).h
 	gcc $(flags_1) $(src_dir)/$(env).c -o $(build_dir)/$(env).o
+
+custom_string = utils/custom_string
+$(build_dir)/$(custom_string).o: $(src_dir)/$(custom_string).c $(src_dir)/$(custom_string).h
+	gcc $(flags_1) $(src_dir)/$(custom_string).c -o $(build_dir)/$(custom_string).o
 
 clean: 
 	rm $(build_dir)/dsh $(objects)
